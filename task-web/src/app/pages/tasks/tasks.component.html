@@ -1,0 +1,81 @@
+<tm-spinner [isLoading]="tasks?.isLoading"></tm-spinner>
+<div class="container-fluid">
+    <div *ngIf="!tasks?.isLoading" class="row">
+        <div class="col-12 p-0">
+            <mat-card class="m-2 p-3">
+                <div class="row">
+                    <div class="col-12">
+                        <mat-card-title>TASKS
+                            <a class="float-right" mat-raised-button [routerLink]="['new']">New</a>
+                        </mat-card-title>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        <div class="row w-100 m-0">
+            <mat-card>
+                <mat-card-content class="m-0">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5>Filters</h5>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field>
+                                <mat-select placeholder="Filter By Status" [(ngModel)]="tasks.filters.properties['status'].value" (selectionChange)="fetch()">
+                                    <mat-option *ngFor="let s of status" [value]="s">
+                                        {{s || 'All' | titlecase}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4">
+                            <mat-form-field>
+                                <mat-select placeholder="Filter By Assigne" [(ngModel)]="tasks.filters.properties['assigne'].value" (selectionChange)="fetch()">
+                                    <mat-option *ngFor="let user of users?.items" [value]="user.id">
+                                        {{user?.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-4"></div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="row w-100">
+            <div class="col col-sm col-md-4 p-2 m-0" *ngFor="let task of tasks?.items">
+                <mat-card class="m-2">
+                    <mat-card-header class="w-100">
+                        <mat-card-title class="font-weight-bold" matTooltip="name"> {{ task?.title || 'N/A' | titlecase}}</mat-card-title>
+                        <mat-card-subtitle class="desc w-100">
+                            {{task?.description | titlecase}}
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-divider></mat-divider>
+                    <mat-card-content class="m-0">
+                        <div class="row">
+                            <div class="col">
+                                <div class="row my-2">
+                                    Status: {{task?.status | uppercase }}
+                                </div>
+                                <div class="row my-2">
+                                    Assigne: {{task?.assigne?.name | titlecase }}
+                                </div>
+                                <div class="row my-2">
+                                    Estimate: {{task?.estimate | uppercase }}
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                    <mat-divider></mat-divider>
+                    <mat-card-actions class="text-center">
+                        <a mat-raised-button (click)="deletetask(task.id)">DELETE</a>
+                        <a mat-raised-button [routerLink]="[ task.id ]">EDIT</a>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

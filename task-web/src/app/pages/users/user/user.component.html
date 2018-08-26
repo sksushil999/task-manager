@@ -1,0 +1,51 @@
+<div class="row">
+    <tm-spinner [isLoading]="user?.isProcessing"></tm-spinner>
+    <div *ngIf="!user?.isProcessing" class="offset-1 col-12">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title class="font-weight-bold">User Details</mat-card-title>
+            </mat-card-header>
+            <form [formGroup]="userForm" novalidate (ngSubmit)="create()">
+                <mat-card-content>
+                    <div class="row">
+
+                        <div class="form-group col-md-6">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" formControlName="name" name="name" [(ngModel)]="user.properties.name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" formControlName="email" name="email" [(ngModel)]="user.properties.email">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group  col-md-6">
+                            <label for="status">Status</label>
+                            <select class="form-control" formControlName="status" name="status" [(ngModel)]="user.properties.status">
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                    </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="password">Password</label>
+                            <input type="text" class="form-control" formControlName="password" name="password" [(ngModel)]="user.properties.password">
+                        </div>
+                    </div>
+                    <div class="row">
+
+
+                    </div>
+                </mat-card-content>
+                <mat-divider></mat-divider>
+                <mat-card-actions>
+                    <button mat-raised-button matTooltip="SAVE" matTooltipPosition="above">
+              SAVE
+            </button>
+                    <button mat-raised-button matTooltip="CANCEL" matTooltipPosition="above" [routerLink]="['../']">
+               CANCEL
+            </button>
+                </mat-card-actions>
+            </form>
+        </mat-card>
+    </div>
+</div>

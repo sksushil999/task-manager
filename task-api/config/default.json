@@ -1,0 +1,27 @@
+{
+    "db": {
+        "database": "task_db",
+        "host": "mongodb://127.0.0.1:27017/task_db"
+    },
+    "auth": {
+        "secret": "eyJ0eXAiOidfsdfJKV1QiLCJhbGciOiJIUzI1NiJ9",
+        "tokenPeriod": "1440h"
+    },
+    "webServer": {
+        "url": "http://demo.com",
+        "adminEmail": "admin@demo.com",
+        "baseUrl": "http://demo.com",
+        "port": "3005"
+    },
+    "logger": {
+        "console": {
+            "level": "silly",
+            "handleExceptions": true,
+            "json": false,
+            "colorize": true
+        }
+    },
+    "providers": {
+
+    }
+}

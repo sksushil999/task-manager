@@ -1,0 +1,56 @@
+<div class="row">
+    <tm-spinner [isLoading]="task?.isProcessing"></tm-spinner>
+    <div *ngIf="!task?.isProcessing" class="offset-1 col-10">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title class="font-weight-bold">Task Details</mat-card-title>
+            </mat-card-header>
+            <form class="w-100" [formGroup]="taskForm" novalidate (ngSubmit)="create()">
+                <mat-card-content>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control" formControlName="title" name="title" [(ngModel)]="task.properties.title">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="description">Description</label>
+                            <input type="description" class="form-control" formControlName="description" name="description" [(ngModel)]="task.properties.description">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group  col-md-6">
+                            <label for="status">Status</label>
+                            <select class="form-control" formControlName="status" name="status" [(ngModel)]="task.properties.status">
+                                  <option value="todo">To Do</option>
+                                  <option value="inProgress">In Progress</option>
+                                  <option value="inTesting">In Testing</option>
+                                  <option value="inProgress">Done</option>
+                                  </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="estimate">Estimate</label>
+                            <input type="estimate" class="form-control" formControlName="estimate" name="estimate" [(ngModel)]="task.properties.estimate">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group  col-md-6">
+                            <label for="assigne">Assigne</label>
+                            <select class="form-control" formControlName="assigne" name="assigne" [(ngModel)]="task.properties.assigne.id">
+                                <option *ngFor="let user of users.items" [value]="user.id" >{{user?.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </mat-card-content>
+                <mat-divider></mat-divider>
+                <mat-card-actions>
+                    <button mat-raised-button matTooltip="SAVE" matTooltipPosition="above">
+                    SAVE
+                    </button>
+                    <button mat-raised-button matTooltip="CANCEL" matTooltipPosition="above" [routerLink]="['../']">
+             CANCEL
+          </button>
+                </mat-card-actions>
+            </form>
+        </mat-card>
+    </div>
+</div>

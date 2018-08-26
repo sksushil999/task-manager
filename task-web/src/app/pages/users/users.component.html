@@ -1,0 +1,58 @@
+<tm-spinner [isLoading]="users?.isLoading"></tm-spinner>
+<div class="container-fluid">
+    <div *ngIf="!users?.isLoading" class="row">
+        <div class="col-12 p-0">
+            <mat-card class="m-2 p-3">
+                <div class="row">
+                    <div class="col-12">
+                        <mat-card-title>USERS
+                            <a *ngIf="role == 'admin'" class="float-right" mat-raised-button [routerLink]="['new']">New</a>
+                        </mat-card-title>
+
+                    </div>
+
+                </div>
+            </mat-card>
+
+        </div>
+        <div class="row w-100">
+            <mat-card>
+                <div class="col-12 text-right">
+                    <mat-form-field>
+                        <mat-select placeholder="Filter By Status" [(ngModel)]="users.filters.properties['status'].value" (selectionChange)="fetch()">
+                            <mat-option *ngFor="let s of status" [value]="s">
+                                {{s || 'All' | titlecase}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </mat-card>
+        </div>
+        <div class="row w-100">
+            <div class=" col col-sm col-md-6 p-2 m-0" *ngFor="let user of users?.items">
+                <mat-card class="m-2">
+                    <mat-card-header>
+                        <mat-card-title class="font-weight-bold">{{ user.name || 'N/A' | titlecase}}</mat-card-title>
+                        <mat-card-subtitle>
+                            {{user?.status | titlecase}}
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="row m-0">
+                            <i class="material-icons" matTooltip="Email">mail</i>
+                            <div class="col">{{user?.email|| 'N/A' }} </div>
+                        </div>
+                    </mat-card-content>
+                    <mat-divider></mat-divider>
+                    <mat-card-actions>
+                        <a mat-raised-button [routerLink]="[user.id]">EDIT</a>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+        <div class="row m-1 w-100 p-0">
+            <mat-paginator class="w-100" [length]="users.totalRecords" [pageSize]="users.pageSize" [pageSizeOptions]="[ 5, 10, 25, 100]" [pageIndex]="users.pageNo - 1" (page)="users.pageSize = $event['pageSize'];users.pageNo = $event['pageIndex']+1;fetch()">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

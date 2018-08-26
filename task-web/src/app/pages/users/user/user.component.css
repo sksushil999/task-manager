@@ -1,0 +1,9 @@
+mat-card.mat-card {
+    width: 81%;
+}
+
+button.mat-raised-button {
+    background-color: #3faf28;
+    color: white;
+   
+}
