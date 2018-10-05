@@ -33,6 +33,7 @@ module.exports.configure = (app) => {
 
     let api = apiRoutes(app);
 
+    api.model('qrs').register('REST');
     api.model('users').register('REST', auth.requiresToken);
 
     api.model('users')
@@ -40,6 +41,14 @@ module.exports.configure = (app) => {
             action: 'POST',
             method: 'signin',
             url: '/signin',
+        }, {
+            action: 'POST',
+            method: 'upload',
+            url: '/image/upload',
+        }, , {
+            action: 'POST',
+            method: 'simplePost',
+            url: '/simple/post',
         }]);
     api.model('tasks').register('REST', auth.requiresToken);
 

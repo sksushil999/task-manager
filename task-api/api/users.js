@@ -3,6 +3,8 @@
 let mapper = require('../mappers/user');
 let auth = require('../middlewares/authorization');
 const updationScheme = require('../helpers/updateEntities');
+const formidable = require('formidable');
+
 
 exports.signin = async(req, res) => {
 
@@ -158,4 +160,33 @@ exports.delete = (req, res) => {
                 return res.success('user deleted successfully ');
             }).catch(err => res.failure(err))
         }).catch(err => res.failure(err))
+};
+
+
+
+exports.upload = async(req, res) => {
+    try {
+        res.data({ data: 'upload done' })
+
+        let form = new formidable.IncomingForm();
+        form.parse(req, async(err, fields, files) => {
+            if (err)
+                return res.failure(err);
+
+            if (!files.image || !files.image.path) {
+                return res.failure('image file is required');
+            }
+
+
+
+
+        });
+
+
+    } catch (e) {
+        res.failure(e);
+    }
+};
+exports.simplePost = async(req, res) => {
+    res.data({ data: "done" })
 };
